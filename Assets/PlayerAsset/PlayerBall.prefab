@@ -12,10 +12,7 @@ GameObject:
   - component: {fileID: 873114322900748278}
   - component: {fileID: 873114322900748265}
   - component: {fileID: 873114322900748264}
-  - component: {fileID: 873114322900748267}
-  - component: {fileID: 873114322900748277}
   - component: {fileID: 873114322900748276}
-  - component: {fileID: 873114322900748274}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: PlayerBall
@@ -99,34 +96,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &873114322900748267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873114322900748266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f9e53f953961948a97bd344ca7fc03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coins: 0
-  coinCounter: {fileID: 0}
---- !u!114 &873114322900748277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873114322900748266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8835ee0c74738b049b04315984605163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swerveSpeed: 1
-  maxSwerveAmount: 1
 --- !u!54 &873114322900748276
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -143,15 +112,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &873114322900748274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873114322900748266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f23a624a237cf49a9653aea3defc12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -7,6 +7,8 @@ TagManager:
   - PlayerBall
   - Coin
   - FinishLevel
+  - Saad
+  - SpawnTrigger
   layers:
   - Default
   - TransparentFX
