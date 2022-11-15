@@ -5,27 +5,26 @@ using UnityEngine;
 
 public class RoadSpawner : MonoBehaviour
 {
-    public List<GameObject> roads;
-    private float offset = 100f;
-    public ObstacleSpawner obstacleSpawner;
+    public GameObject road;
+    Vector3 nextSpawnPoint;
+    //private float offset = 100f;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if(roads != null && roads.Count > 0)
+        for(int i = 0; i<15; i++)
         {
-            roads = roads.OrderBy(r => r.transform.position.z).ToList();
+            SpawnRoad();
         }
     }
 
-    public void MoveRoad()
+    public void SpawnRoad()
     {
-        GameObject moveRoad = roads[0];
-        roads.Remove(moveRoad);
-        float newZ = roads[roads.Count - 1].transform.position.z + offset;
-        moveRoad.transform.position = new Vector3(0, 0, newZ);
-        roads.Add(moveRoad);
+        GameObject temp = Instantiate(road, nextSpawnPoint, Quaternion.identity);
+        nextSpawnPoint = temp.transform.GetChild(0).transform.position;
     }
+
+
 
 
 }

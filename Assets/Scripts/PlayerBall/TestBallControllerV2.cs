@@ -16,8 +16,10 @@ public class TestBallControllerV2 : MonoBehaviour
     private float velocity, camVelocity;
     private Camera mainCam;
     public Transform path;
+    public GameObject FinishLine;
 
     private float moveSpeed = 5f;
+    private float moveSpeedMax = 15f;
 
     private int coin = 0;
 
@@ -61,6 +63,12 @@ public class TestBallControllerV2 : MonoBehaviour
 
                 DesireBallPos.x = Mathf.Clamp(DesireBallPos.x, -1.6f, 1.6f);
 
+                moveSpeed += 1;
+                if(moveSpeed >= moveSpeedMax)
+                {
+                    moveSpeed = moveSpeedMax;
+                }
+
                 ball.position = new Vector3(Mathf.SmoothDamp(ball.position.x, DesireBallPos.x, ref velocity, maxSpeed), ball.position.y, ball.position.z + moveSpeed * Time.deltaTime);
 
             }
@@ -72,6 +80,8 @@ public class TestBallControllerV2 : MonoBehaviour
         //path.position = new Vector3(pathNewPos.x, pathNewPos.y, Mathf.MoveTowards(pathNewPos.z, -1000f, pathSpeed * Time.deltaTime));
 
         //}
+
+        
 
 
 
@@ -106,12 +116,23 @@ public class TestBallControllerV2 : MonoBehaviour
                 PlayerPrefs.SetInt("Onoo", coin);
                 MenuManager.MenuManagerInstance.menuElement[3].GetComponent<Text>().text = coin.ToString();
             }
+
+            if (coin >= 20)
+            {
+                FinishLine.SetActive(true);
+            }
+            else
+            {
+                FinishLine.SetActive(false);
+            }
         }
 
         if(coll.gameObject.tag == "SpawnTrigger")
         {
-            roadSpawner.MoveRoad();
+            //roadSpawner.MoveRoad();
         }
        
     }
+
+    
 }
