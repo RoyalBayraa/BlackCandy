@@ -57,11 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerBall\TestBallControllerV2.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager\ShortRoadEvent.cs" />
     <Compile Include="Assets\Scripts\MenuMNG\MenuManager.cs" />
     <Compile Include="Assets\Scripts\SpawnManager\ObstacleSpawner.cs" />
-    <Compile Include="Assets\Scripts\Coin\CompleteLevel.cs" />
+    <Compile Include="Assets\Scripts\CompleteLevel.cs" />
     <Compile Include="Assets\Scripts\SpawnManager\RoadSpawner.cs" />
-    <Compile Include="Assets\Scripts\SpawnManager\ShortRoadEvent.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

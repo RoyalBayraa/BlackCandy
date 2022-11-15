@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RoadSpawner : MonoBehaviour
 {
-    public GameObject road;
+    public List<GameObject> roads;
     Vector3 nextSpawnPoint;
     //private float offset = 100f;
 
@@ -20,8 +20,22 @@ public class RoadSpawner : MonoBehaviour
 
     public void SpawnRoad()
     {
-        GameObject temp = Instantiate(road, nextSpawnPoint, Quaternion.identity);
-        nextSpawnPoint = temp.transform.GetChild(0).transform.position;
+
+        if (PlayerPrefs.GetInt("level", 0) <= 1)
+        {
+            GameObject temp = Instantiate(roads[0], nextSpawnPoint, Quaternion.identity);
+            nextSpawnPoint = temp.transform.GetChild(0).transform.position;
+        }
+        else if (PlayerPrefs.GetInt("level", 0) <= 2)
+        {
+            GameObject temp = Instantiate(roads[1], nextSpawnPoint, Quaternion.identity);
+            nextSpawnPoint = temp.transform.GetChild(0).transform.position;
+        }
+        else
+        {
+            GameObject temp = Instantiate(roads[2], nextSpawnPoint, Quaternion.identity);
+            nextSpawnPoint = temp.transform.GetChild(0).transform.position;
+        }
     }
 
 

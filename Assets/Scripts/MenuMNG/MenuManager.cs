@@ -14,7 +14,8 @@ public class MenuManager : MonoBehaviour
         GameState = false;
         MenuManagerInstance = this;
 
-        MenuManager.MenuManagerInstance.menuElement[3].GetComponent<Text>().text = PlayerPrefs.GetInt("Onoo",0).ToString();
+        MenuManager.MenuManagerInstance.menuElement[3].GetComponent<Text>().text = PlayerPrefs.GetInt("Onoo", 0).ToString();
+        MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = PlayerPrefs.GetInt("level", 0).ToString();
     }
 
     void Update()

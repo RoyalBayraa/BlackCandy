@@ -21,6 +21,8 @@ public class TestBallControllerV2 : MonoBehaviour
     private float moveSpeed = 5f;
     private float moveSpeedMax = 15f;
 
+    private int levelNubmer = 1;
+
     private int coin = 0;
 
     void Start()
@@ -32,6 +34,8 @@ public class TestBallControllerV2 : MonoBehaviour
     
     void Update()
     {
+
+        MenuManager.MenuManagerInstance.menuElement[4].GetComponent<Text>().text = PlayerPrefs.GetInt("level", 0).ToString();
         if (Input.GetMouseButtonDown(0) && MenuManager.MenuManagerInstance.GameState)
         {
             moveTheBall = true;
@@ -98,6 +102,7 @@ public class TestBallControllerV2 : MonoBehaviour
 
     public void OnTriggerEnter(Collider coll)
     {
+
         if (coll.CompareTag("Saad"))
         {
             gameObject.SetActive(false);
@@ -110,6 +115,7 @@ public class TestBallControllerV2 : MonoBehaviour
         {
             Destroy(coll.gameObject);
             coin++;
+            //MenuManager.MenuManagerInstance.menuElement[4].GetComponent<Text>().text = levelNubmer.ToString();
             MenuManager.MenuManagerInstance.menuElement[1].GetComponent<Text>().text = coin.ToString();
             if(coin > PlayerPrefs.GetInt("Onoo", 0))
             {
@@ -117,19 +123,28 @@ public class TestBallControllerV2 : MonoBehaviour
                 MenuManager.MenuManagerInstance.menuElement[3].GetComponent<Text>().text = coin.ToString();
             }
 
+            if(levelNubmer > PlayerPrefs.GetInt("level", 0))
+            {
+                PlayerPrefs.SetInt("level", levelNubmer);
+                MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = levelNubmer.ToString();
+            }
+
             if (coin >= 20)
             {
-                FinishLine.SetActive(true);
-            }
-            else
-            {
-                FinishLine.SetActive(false);
+                coin = 0;
+                levelNubmer++;
+                PlayerPrefs.SetInt("level", levelNubmer);
+                Debug.Log("Next Level");
             }
         }
 
-        if(coll.gameObject.tag == "SpawnTrigger")
+        if(coll.gameObject.tag == "FinishLevel")
         {
-            //roadSpawner.MoveRoad();
+            coin = 0;
+            levelNubmer++;
+
+           
+            FinishLine.SetActive(false);
         }
        
     }
