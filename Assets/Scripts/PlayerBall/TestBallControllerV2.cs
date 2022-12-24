@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class TestBallControllerV2 : MonoBehaviour
 {
     public RoadSpawner roadSpawner;
-    
+
+
+
     private Transform ball;
     private Vector3 startMousePos, startBallPos;
     private bool moveTheBall;
@@ -21,7 +23,7 @@ public class TestBallControllerV2 : MonoBehaviour
     private float moveSpeed = 5f;
     private float moveSpeedMax = 15f;
 
-    private int levelNubmer = 1;
+    private static int levelNubmer = 1;
 
     private int coin = 0;
 
@@ -29,14 +31,16 @@ public class TestBallControllerV2 : MonoBehaviour
     {
         ball = transform;
         mainCam = Camera.main;
+        PlayerPrefs.SetInt("level", levelNubmer);
+        MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = PlayerPrefs.GetInt("level", 1).ToString();
+        Debug.Log(levelNubmer);
     }
 
     
     void Update()
     {
-
-        MenuManager.MenuManagerInstance.menuElement[4].GetComponent<Text>().text = PlayerPrefs.GetInt("level", 0).ToString();
-        if (Input.GetMouseButtonDown(0) && MenuManager.MenuManagerInstance.GameState)
+        MenuManager.MenuManagerInstance.menuElement[4].GetComponent<Text>().text = PlayerPrefs.GetInt("level", 1).ToString();
+        if (Input.GetMouseButtonDown(0) && MenuManager.MenuManagerInstance.GameState == true)
         {
             moveTheBall = true;
 
@@ -65,7 +69,7 @@ public class TestBallControllerV2 : MonoBehaviour
                 Vector3 MouseNewPos = mouseNewPos - startMousePos;
                 Vector3 DesireBallPos = MouseNewPos + startBallPos;
 
-                DesireBallPos.x = Mathf.Clamp(DesireBallPos.x, -1.6f, 1.6f);
+                DesireBallPos.x = Mathf.Clamp(DesireBallPos.x, -1.7f, 1.7f);
 
                 moveSpeed += 1;
                 if(moveSpeed >= moveSpeedMax)
@@ -123,28 +127,40 @@ public class TestBallControllerV2 : MonoBehaviour
                 MenuManager.MenuManagerInstance.menuElement[3].GetComponent<Text>().text = coin.ToString();
             }
 
-            if(levelNubmer > PlayerPrefs.GetInt("level", 0))
-            {
-                PlayerPrefs.SetInt("level", levelNubmer);
-                MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = levelNubmer.ToString();
-            }
+            //if (levelNubmer > PlayerPrefs.GetInt("level", 0))
+            //{
+            //    PlayerPrefs.SetInt("level", levelNubmer);
+            //    MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = levelNubmer.ToString();
+            //}
 
-            if (coin >= 20)
-            {
-                coin = 0;
-                levelNubmer++;
-                PlayerPrefs.SetInt("level", levelNubmer);
-                Debug.Log("Next Level");
-            }
         }
 
-        if(coll.gameObject.tag == "FinishLevel")
+        if(coll.CompareTag("FinishLevel"))
         {
-            coin = 0;
-            levelNubmer++;
+            gameObject.SetActive(false);
+            MenuManager.MenuManagerInstance.GameState = false;
+            MenuManager.MenuManagerInstance.menuElement[6].SetActive(true);
+            if(coin >= 20)
+            {
+                MenuManager.MenuManagerInstance.menuElement[6].transform.GetChild(0).GetComponent<Text>().text = "You win";
+                MenuManager.MenuManagerInstance.menuElement[6].transform.GetChild(1).GetComponent<Text>().text = coin.ToString();
+                MenuManager.MenuManagerInstance.menuElement[8].SetActive(true);
+                levelNubmer++;
+                Debug.Log(levelNubmer);
+                if (levelNubmer > PlayerPrefs.GetInt("level", 1))
+                {
+                    PlayerPrefs.SetInt("level", levelNubmer);
+                    MenuManager.MenuManagerInstance.menuElement[5].GetComponent<Text>().text = levelNubmer.ToString();
+                }
 
-           
-            FinishLine.SetActive(false);
+            }
+            else
+            {
+                MenuManager.MenuManagerInstance.menuElement[6].transform.GetChild(0).GetComponent<Text>().text = "You Lose";
+                MenuManager.MenuManagerInstance.menuElement[6].transform.GetChild(1).GetComponent<Text>().text = coin.ToString();
+                MenuManager.MenuManagerInstance.menuElement[7].SetActive(true);
+            }
+            coin = 0;
         }
        
     }

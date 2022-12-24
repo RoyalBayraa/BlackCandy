@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void StartTheGame()
@@ -30,6 +30,11 @@ public class MenuManager : MonoBehaviour
     }
 
     public void TryAgain_btn()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel_btn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

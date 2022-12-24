@@ -14,7 +14,7 @@ public class ShortRoadEvent : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        roadSpawner.SpawnRoad();
+        //roadSpawner.SpawnRoad();
         Destroy(gameObject, 2);
     }
 
